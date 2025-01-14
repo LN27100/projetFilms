@@ -1,19 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchMovieDetails, fetchMovieCredits } from '../api';
+import { fetchMovieDetails, fetchMovieCredits, fetchSimilarMovies } from '../api';
 import ActorList from './ActorList';
+import styles from './MovieDetail.module.css';
 
 const MovieDetail = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
   const [credits, setCredits] = useState(null);
+  const [similarMovies, setSimilarMovies] = useState([]);
 
   useEffect(() => {
     const getMovieDetails = async () => {
       const movieData = await fetchMovieDetails(movieId);
       const creditsData = await fetchMovieCredits(movieId);
+      const similarMoviesData = await fetchSimilarMovies(movieId);
       setMovie(movieData);
       setCredits(creditsData);
+      setSimilarMovies(similarMoviesData);
     };
     getMovieDetails();
   }, [movieId]);
@@ -23,11 +27,23 @@ const MovieDetail = () => {
   }
 
   return (
-    <div>
+    <div className={styles.movieDetail}>
       <h1>{movie.title}</h1>
+      <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} className={styles.moviePoster} />
       <p>{movie.overview}</p>
-      <h2>Acteurs principaux</h2>
-      <ActorList actors={credits.cast} />
+      <p>Date de sortie: {movie.release_date}</p>
+      <p>Note: {movie.vote_average}</p>
+      <h2>Acteurs Principaux</h2>
+      <ActorList actors={credits.cast.slice(0, 10)} />
+      <h2>Films Similaires</h2>
+      <ul className={styles.similarMoviesList}>
+        {similarMovies.map(similarMovie => (
+          <li key={similarMovie.id} className={styles.similarMovieItem}>
+            <img src={`https://image.tmdb.org/t/p/w500${similarMovie.poster_path}`} alt={similarMovie.title} className={styles.similarMoviePoster} />
+            <h3>{similarMovie.title}</h3>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

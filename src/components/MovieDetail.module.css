@@ -1,0 +1,40 @@
+.movieDetail {
+    text-align: center;
+  }
+  
+  .moviePoster {
+    width: 300px;
+    height: 450px;
+    object-fit: cover;
+  }
+  
+  .addToWishlistButton {
+    padding: 10px;
+    font-size: 1em;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .similarMoviesList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .similarMovieItem {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .similarMoviePoster {
+    width: 150px;
+    height: 225px;
+    object-fit: cover;
+  }
+  
