@@ -38,7 +38,7 @@ const MovieDetail = () => {
       <div className={styles.movieCard}>
         <h1>{movie.title}</h1>
         <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} className={styles.moviePoster} />
-        <p>{movie.overview}</p>
+        <p className={styles.overview}>{movie.overview}</p>
         <p>Date de sortie: {movie.release_date}</p>
         <p>Note: {movie.vote_average}</p>
         <button onClick={() => addToWishlist(movie)} className={styles.addToWishlistButton}>Ajouter à la Liste de Souhaits</button>
