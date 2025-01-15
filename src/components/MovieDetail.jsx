@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchMovieDetails, fetchMovieCredits, fetchSimilarMovies } from '../api';
 import ActorList from './ActorList';
+import { WishlistContext } from '../context/WishlistContext';
 import styles from './MovieDetail.module.css';
 
 const MovieDetail = () => {
@@ -9,6 +10,7 @@ const MovieDetail = () => {
   const [movie, setMovie] = useState(null);
   const [credits, setCredits] = useState(null);
   const [similarMovies, setSimilarMovies] = useState([]);
+  const { addToWishlist } = useContext(WishlistContext);
 
   useEffect(() => {
     const getMovieDetails = async () => {
@@ -28,11 +30,14 @@ const MovieDetail = () => {
 
   return (
     <div className={styles.movieDetail}>
-      <h1>{movie.title}</h1>
-      <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} className={styles.moviePoster} />
-      <p>{movie.overview}</p>
-      <p>Date de sortie: {movie.release_date}</p>
-      <p>Note: {movie.vote_average}</p>
+      <div className={styles.movieCard}>
+        <h1>{movie.title}</h1>
+        <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} className={styles.moviePoster} />
+        <p>{movie.overview}</p>
+        <p>Date de sortie: {movie.release_date}</p>
+        <p>Note: {movie.vote_average}</p>
+        <button onClick={() => addToWishlist(movie)} className={styles.addToWishlistButton}>Ajouter à la Liste de Souhaits</button>
+      </div>
       <h2>Acteurs Principaux</h2>
       <ActorList actors={credits.cast.slice(0, 10)} />
       <h2>Films Similaires</h2>

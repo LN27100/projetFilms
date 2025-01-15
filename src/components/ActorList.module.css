@@ -1,0 +1,19 @@
+.actorList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.actorItem {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+}
+
+.actorImage {
+  width: 100px;
+  height: 150px;
+  object-fit: cover;
+}

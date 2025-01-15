@@ -58,7 +58,7 @@ const MovieList = () => {
       <ul className={styles.movieList}>
         {movies.map(movie => (
           <li key={movie.id} className={styles.movieItem}>
-            <Link to={`/film/${movie.id}`}>
+            <Link to={`/movie/${movie.id}`}>
               <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} className={styles.moviePoster} />
               <h2>{movie.title}</h2>
               <p>Note: {movie.vote_average}</p>
