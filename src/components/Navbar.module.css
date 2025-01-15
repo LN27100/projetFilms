@@ -1,0 +1,16 @@
+.navbar {
+  background-color: #514e4e;
+  padding: 10px;
+  text-align: center;
+}
+
+.navLink {
+  color: #ba8aea;
+  margin: 0 15px;
+  text-decoration: none;
+  font-size: 1.2em;
+}
+
+.navLink:hover {
+  text-decoration: underline;
+}

@@ -1,6 +1,6 @@
 .title {
     font-size: 2em;
-    color: #333;
+    color: #AC92C6;
     text-align: center;
   }
   
@@ -53,6 +53,7 @@
   
   .movieItem {
     border: 1px solid #ccc;
+    background-color: black;
     border-radius: 8px;
     padding: 10px;
     text-align: center;

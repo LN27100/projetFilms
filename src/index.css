@@ -1,6 +1,6 @@
 body {
   background-color: #2c2c2c;
-  color: #fff;
+  color: #ffffff;
   font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
@@ -11,11 +11,11 @@ body {
 }
 
 h1, h2, h3 {
-  color: white;
+  color: #6a0dad;
 }
 
 a {
-  color: white;
+  color: #6a0dad;
   text-decoration: none;
 }
 
@@ -26,38 +26,38 @@ a:hover {
 button {
   padding: 10px;
   font-size: 1em;
-  background-color: #ff6f61;
-  color: white;
+  background-color: #6a0dad;
+  color: #ffffff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: #e65c4f;
+  background-color: #5a189a;
 }
 
 input[type="text"] {
   padding: 10px;
   font-size: 1em;
-  border: 1px solid #fff;
+  border: 1px solid #ffffff;
   border-radius: 4px;
-  background-color: #333;
-  color: #fff;
+  background-color: black;
+  color: #ffffff;
 }
 
 input[type="text"]:focus {
   outline: none;
-  border-color: #ff6f61;
+  border-color: #6a0dad;
 }
 
 .card {
-  border: 1px solid #fff;
+  border: 1px solid #ffffff;
   border-radius: 8px;
   padding: 10px;
   text-align: center;
-  background-color: #333;
-  color: #fff;
+  background-color: black; 
+  color: #ffffff;
 }
 
 .card img {
@@ -65,4 +65,9 @@ input[type="text"]:focus {
   height: auto;
   object-fit: cover;
   border-radius: 8px;
+}
+
+ul, ol {
+  list-style-type: none;
+  padding-left: 0;
 }
