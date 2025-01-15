@@ -47,7 +47,6 @@ const MovieList = () => {
           placeholder="Rechercher un film..."
           className={styles.searchInput}
         />
-        <button type="submit" className={styles.searchButton}>Rechercher</button>
       </form>
       <div className={styles.categoryButtons}>
         <button onClick={() => setCategory('popular')}>Populaires</button>
