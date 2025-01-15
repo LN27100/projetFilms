@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { fetchPopularMovies, fetchNowPlayingMovies, fetchTopRatedMovies, fetchUpcomingMovies, searchMovies } from '../api';
 import { Link } from 'react-router-dom';
 import styles from './MovieList.module.css';
+import defaultImage from '../assets/default_picture.jpg';
 
 const MovieList = () => {
   const [movies, setMovies] = useState([]);
@@ -69,10 +70,15 @@ const MovieList = () => {
       <ul className={styles.movieList}>
         {movies.map((movie) => (
           <li key={movie.id} className={styles.movieItem}>
-            <Link to={`/movie/${movie.id}`}>
-              <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} className={styles.moviePoster} />
-              <h2>{movie.title}</h2>
-              <p>Note: {movie.vote_average}</p>
+            <img
+              src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : defaultImage}
+              alt={movie.title}
+              className={styles.moviePoster}
+            />
+            <h2>{movie.title}</h2>
+            <p>Note: {movie.vote_average}</p>
+            <Link to={`/movie/${movie.id}`} className={styles.detailsButton}>
+              Voir les détails
             </Link>
           </li>
         ))}

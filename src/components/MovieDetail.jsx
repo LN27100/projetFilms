@@ -4,6 +4,7 @@ import { fetchMovieDetails, fetchMovieCredits, fetchSimilarMovies } from '../api
 import ActorList from './ActorList';
 import { WishlistContext } from '../context/WishlistContext';
 import styles from './MovieDetail.module.css';
+import defaultImage from '../assets/default_picture.jpg';
 
 const MovieDetail = () => {
   const { movieId } = useParams();
@@ -44,7 +45,11 @@ const MovieDetail = () => {
       <ul className={styles.similarMoviesList}>
         {similarMovies.map(similarMovie => (
           <li key={similarMovie.id} className={styles.similarMovieItem}>
-            <img src={`https://image.tmdb.org/t/p/w500${similarMovie.poster_path}`} alt={similarMovie.title} className={styles.similarMoviePoster} />
+            <img
+              src={similarMovie.poster_path ? `https://image.tmdb.org/t/p/w500${similarMovie.poster_path}` : defaultImage}
+              alt={similarMovie.title}
+              className={styles.similarMoviePoster}
+            />
             <h3>{similarMovie.title}</h3>
           </li>
         ))}
