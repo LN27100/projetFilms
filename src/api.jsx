@@ -3,42 +3,65 @@ import axios from 'axios';
 const API_KEY = '9afb004ff899e32aaaa7cffea500b06d';
 const BASE_URL = 'https://api.themoviedb.org/3';
 
-export const fetchPopularMovies = async () => {
-  const response = await axios.get(`${BASE_URL}/movie/popular?api_key=${API_KEY}`);
-  return response.data.results;
+const createApiUrl = (endpoint, params = {}) => {
+  const queryParams = new URLSearchParams({ api_key: API_KEY, ...params });
+  return `${BASE_URL}/${endpoint}?${queryParams.toString()}`;
 };
 
-export const fetchNowPlayingMovies = async () => {
-  const response = await axios.get(`${BASE_URL}/movie/now_playing?api_key=${API_KEY}`);
-  return response.data.results;
+// Fonction pour récupérer les films populaires
+export const fetchPopularMovies = async (page = 1) => {
+  const url = createApiUrl('movie/popular', { page });
+  const response = await axios.get(url);
+  return response.data;
 };
 
-export const fetchTopRatedMovies = async () => {
-  const response = await axios.get(`${BASE_URL}/movie/top_rated?api_key=${API_KEY}`);
-  return response.data.results;
+// Fonction pour récupérer les films en cours de diffusion
+export const fetchNowPlayingMovies = async (page = 1) => {
+  const url = createApiUrl('movie/now_playing', { page });
+  const response = await axios.get(url);
+  return response.data;
 };
 
-export const fetchUpcomingMovies = async () => {
-  const response = await axios.get(`${BASE_URL}/movie/upcoming?api_key=${API_KEY}`);
-  return response.data.results;
+// Fonction pour récupérer les films les mieux notés
+export const fetchTopRatedMovies = async (page = 1) => {
+  const url = createApiUrl('movie/top_rated', { page });
+  const response = await axios.get(url);
+  return response.data;
 };
 
+// Fonction pour récupérer les films à venir
+export const fetchUpcomingMovies = async (page = 1) => {
+  const url = createApiUrl('movie/upcoming', { page });
+  const response = await axios.get(url);
+  return response.data;
+};
+
+// Fonction pour récupérer les détails d'un film
 export const fetchMovieDetails = async (movieId) => {
-  const response = await axios.get(`${BASE_URL}/movie/${movieId}?api_key=${API_KEY}`);
+  const url = createApiUrl(`movie/${movieId}`);
+  const response = await axios.get(url);
   return response.data;
 };
 
+// Fonction pour récupérer les crédits d'un film
 export const fetchMovieCredits = async (movieId) => {
-  const response = await axios.get(`${BASE_URL}/movie/${movieId}/credits?api_key=${API_KEY}`);
+  const url = createApiUrl(`movie/${movieId}/credits`);
+  const response = await axios.get(url);
   return response.data;
 };
 
+// Fonction pour récupérer les films similaires
 export const fetchSimilarMovies = async (movieId) => {
-  const response = await axios.get(`${BASE_URL}/movie/${movieId}/similar?api_key=${API_KEY}`);
+  const url = createApiUrl(`movie/${movieId}/similar`);
+  const response = await axios.get(url);
   return response.data.results;
 };
 
-export const searchMovies = async (query) => {
-  const response = await axios.get(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${query}`);
-  return response.data.results;
+// Fonction pour rechercher des films
+export const searchMovies = async (query, page = 1) => {
+  const url = createApiUrl('search/movie', { query, page });
+  const response = await axios.get(url);
+  return response.data;
 };
+
+
