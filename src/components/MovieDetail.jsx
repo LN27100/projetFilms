@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { fetchMovieDetails, fetchMovieCredits, fetchSimilarMovies } from '../api';
 import ActorList from './ActorList';
 import { WishlistContext } from '../context/WishlistContext';
@@ -29,6 +29,10 @@ const MovieDetail = () => {
     return <div>Chargement...</div>;
   }
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <div className={styles.movieDetail}>
       <div className={styles.movieCard}>
@@ -45,11 +49,13 @@ const MovieDetail = () => {
       <ul className={styles.similarMoviesList}>
         {similarMovies.map(similarMovie => (
           <li key={similarMovie.id} className={styles.similarMovieItem}>
-            <img
-              src={similarMovie.poster_path ? `https://image.tmdb.org/t/p/w500${similarMovie.poster_path}` : defaultImage}
-              alt={similarMovie.title}
-              className={styles.similarMoviePoster}
-            />
+            <Link to={`/movie/${similarMovie.id}`} onClick={scrollToTop}>
+              <img
+                src={similarMovie.poster_path ? `https://image.tmdb.org/t/p/w500${similarMovie.poster_path}` : defaultImage}
+                alt={similarMovie.title}
+                className={styles.similarMoviePoster}
+              />
+            </Link>
             <h3>{similarMovie.title}</h3>
           </li>
         ))}
