@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { fetchPopularMovies, fetchNowPlayingMovies, fetchTopRatedMovies, fetchUpcomingMovies, searchMovies } from '../api';
 import { Link } from 'react-router-dom';
 import styles from './MovieList.module.css';
@@ -35,13 +35,33 @@ const MovieList = () => {
     fetchMovies(currentPage);
   }, [category, currentPage]);
 
-  const handleSearch = async (e) => {
-    e.preventDefault();
-    const data = await searchMovies(searchQuery);
-    setMovies(data.results);
-    setTotalPages(1);
+  // Optimisation des appels API avec debounce
+  const debounce = (func, delay) => {
+    let debounceTimer;
+    return function() {
+      const context = this;
+      const args = arguments;
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => func.apply(context, args), delay);
+    };
   };
 
+  const handleSearch = useCallback(
+    debounce(async (query) => {
+      const data = await searchMovies(query);
+      setMovies(data.results);
+      setTotalPages(data.total_pages);
+    }, 500),
+    []
+  );
+
+  useEffect(() => {
+    if (searchQuery) {
+      handleSearch(searchQuery);
+    }
+  }, [searchQuery, handleSearch]);
+
+    // Pagination dans la liste des films
   const handlePageChange = (direction) => {
     setCurrentPage((prevPage) => {
       const newPage = prevPage + direction;
@@ -52,7 +72,7 @@ const MovieList = () => {
   return (
     <div>
       <h1 className={styles.title}>CinéBiblio</h1>
-      <form onSubmit={handleSearch} className={styles.searchForm}>
+      <form className={styles.searchForm}>
         <input
           type="text"
           value={searchQuery}
