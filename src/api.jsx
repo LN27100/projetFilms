@@ -4,7 +4,7 @@ const API_KEY = '9afb004ff899e32aaaa7cffea500b06d';
 const BASE_URL = 'https://api.themoviedb.org/3';
 
 const createApiUrl = (endpoint, params = {}) => {
-  const queryParams = new URLSearchParams({ api_key: API_KEY, ...params });
+  const queryParams = new URLSearchParams({ api_key: API_KEY, language: 'fr-FR', ...params });
   return `${BASE_URL}/${endpoint}?${queryParams.toString()}`;
 };
 
@@ -63,5 +63,3 @@ export const searchMovies = async (query, page = 1) => {
   const response = await axios.get(url);
   return response.data;
 };
-
-
