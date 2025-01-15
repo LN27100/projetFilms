@@ -16,6 +16,7 @@
   text-align: center;
   background-color: black;
   color: #ffffff;
+  box-shadow: 4px 4px 8px rgba(255, 111, 97, 0.5);
 }
 
 .wishlistItemImage {
@@ -27,9 +28,14 @@
 .removeButton {
   padding: 10px;
   font-size: 1em;
-  background-color: #6a0dad;
+  background-color: #ff6f61;
   color: #ffffff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+}
+
+.removeButton:hover {
+  color: black;
+  background-color: #f64d3e;
 }

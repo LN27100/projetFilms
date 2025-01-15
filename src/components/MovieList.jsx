@@ -107,7 +107,7 @@ const MovieList = () => {
         <button onClick={() => handlePageChange(-1)} disabled={currentPage === 1}>
           Précédent
         </button>
-        <span>Page {currentPage} sur {totalPages}</span>
+        <span className={styles.spanPage}>Page {currentPage} sur {totalPages}</span>
         <button onClick={() => handlePageChange(1)} disabled={currentPage === totalPages}>
           Suivant
         </button>
